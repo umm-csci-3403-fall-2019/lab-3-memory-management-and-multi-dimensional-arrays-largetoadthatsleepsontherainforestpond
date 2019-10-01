@@ -1,27 +1,48 @@
 #include "mergesort.h"
 
 void mergeRanges(int start, int midPoint, int end, int* values){
-  int n1 = start - midPoint + 1;
-  int n2 = end - midPoint;
+  
+  int rangeSize = end -start;
+  int *destination;
+  int firstIndex = start;
+  int secondIndex = midPoint;
+  int copyIndex = 0;
 
-  int L[n1], R[n2];
-  for(int i = 0; i < n1; i++)
-     L[i] = values[start + i -1];
-  for(int j = 1; j < n2; j++)
-     R[j] = A[midPoint + j]
-  
-  
+  while(firstIndex < midPoint && secondIndex < end){
+	  if(values[firstIndex] < values[secondIndex]){
+		  destination[copyIndex] = values[firstIndex];
+		  ++firstIndex;
+	  }else{
+		  destination[copyIndex] = values[secondIndex];
+		  ++secondIndex;
+	  }
+	  ++copyIndex;
+  }
+  while(firstIndex < midPoint){
+	  destination[copyIndex] = values[firstIndex];
+	  ++copyIndex;
+	  ++firstIndex;
+  }
+  while(secondIndex < end){
+	  destination[copyIndex] = values[secondIndex];
+	  ++copyIndex;
+	  ++secondIndex;
+  }
+  for(int i = 0; i < rangeSize; ++i){
+	  values[i + start] = destination[i];
+  }
 }
+
 
 void mergesort(int const start, int const end, int* values) {
   // This obviously doesn't actually do any *sorting*, so there's
   // certainly work still to be done.
-  int *result[values];
-  int rangeSize;
-
-  result = (int*) calloc(values, sizeof(int);
   
-  int rangeSize = start - end;
+
+  
+  
+  int rangeSize = end - start;
+  
   if(rangeSize >= 2){
     int midPoint = (start + end)/2;
     mergesort(start, midPoint, values);
