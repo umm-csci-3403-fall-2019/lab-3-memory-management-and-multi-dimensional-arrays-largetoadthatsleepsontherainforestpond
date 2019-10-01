@@ -1,18 +1,20 @@
 #include "mergesort.h"
+#include <stdlib.h>
 
-void mergesort(int end, int* values) {
+void mergesort(int size, int* values){
+	mergesortRange(0, size, values);
+}
+
+void mergesortRange(int start, int end, int* values) {
   // This obviously doesn't actually do any *sorting*, so there's
   // certainly work still to be done.
 
-
-
-
-  int rangeSize = end;
+  int rangeSize = end - start;
 
   if(rangeSize >= 2){
-    int midPoint =  end/2;
-    mergesort(start, midPoint, values);
-    mergesort(midPoint, end, values);
+    int midPoint =  (start + end)/2;
+    mergesortRange(start, midPoint, values);
+    mergesortRange(midPoint, end, values);
     mergeRanges(start, midPoint, end, values);
   }
   return;
@@ -21,8 +23,9 @@ void mergesort(int end, int* values) {
 
 void mergeRanges(int start, int midPoint, int end, int* values){
   
-  int rangeSize = end -start;
+  int rangeSize = end - start;
   int *destination;
+  destination = (int*) calloc(end+1, sizeof(int));
   int firstIndex = start;
   int secondIndex = midPoint;
   int copyIndex = 0;
@@ -50,6 +53,7 @@ void mergeRanges(int start, int midPoint, int end, int* values){
   for(int i = 0; i < rangeSize; ++i){
 	  values[i + start] = destination[i];
   }
+  free(destination);
 }
 
 
