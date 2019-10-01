@@ -7,4 +7,5 @@
 
 void mergesort(int size, int values[]);
 
+void mergeRanges(int start, int midPoint, int end, int values[]);
 #endif
