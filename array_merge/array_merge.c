@@ -1,5 +1,6 @@
 #include "array_merge.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include "../mergesort/mergesort.h"
 int* array_merge(int num_arrays, int* sizes, int** values) {
   int* result;
@@ -17,8 +18,12 @@ int* array_merge(int num_arrays, int* sizes, int** values) {
 	placeholder = sizes[i];
   }
   mergesort(m,destination);
- 
   int k =1;
+
+  if(num_arrays == 0){
+          k=0;
+  }	  
+
   for(int i=1; i<m; i++){
        if(destination[i] != destination[i-1]){
                k++;
@@ -27,9 +32,11 @@ int* array_merge(int num_arrays, int* sizes, int** values) {
   result = (int*) calloc(k+1, sizeof(int));
   result[0] = k;
   result[1] = destination[0];
-  for(int i=1;i<m;i++){
+  int n = 2;
+  for(int i=1; i<m; i++){
 	  if(destination[i] != destination[i-1]){
-	      result[i+1] = destination[i];
+	      result[n] = destination[i];
+	      n++;
 	  }
   }
   free(destination); 
