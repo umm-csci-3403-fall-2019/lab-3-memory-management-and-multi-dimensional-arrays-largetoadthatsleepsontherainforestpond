@@ -31,7 +31,9 @@ int* array_merge(int num_arrays, int* sizes, int** values) {
   }
   result = (int*) calloc(k+1, sizeof(int));
   result[0] = k;
+  if(k == 1){
   result[1] = destination[0];
+  }
   int n = 2;
   for(int i=1; i<m; i++){
 	  if(destination[i] != destination[i-1]){
